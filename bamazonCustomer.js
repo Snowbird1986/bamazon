@@ -77,14 +77,14 @@ inquirer.prompt([
                                 product_name: purchaseItem.item
                                 }
                             ], function(err, res) {
-                                console.log(res)
+                                // console.log(res)
                                 var stock = res[0].stock_quantity
                                 var price = res[0].price
                                 var quantity = stock-purchaseItem.number
                                 var cost = price*purchaseItem.number
                                 var sales = res[0].product_sales+cost
-                                console.log(quantity)
-                                console.log(purchaseItem.item)
+                                // console.log(quantity)
+                                // console.log(purchaseItem.item)
                                 // console.log(purchaseItem.number)
                                 if(quantity>0){
                                 connection1.query("UPDATE products SET ? WHERE ?",
@@ -251,8 +251,8 @@ inquirer.prompt([
                             case 'View Product Sales by Department':
                                 connection1.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.department_name, sum(products.product_sales) AS Department_Sales FROM departments LEFT JOIN products ON departments.department_name=products.department_name GROUP BY departments.department_id, departments.department_name", function(err, res) {
                                     if (err) throw err;
-                                    console.log(this.sql)
-                                    console.log(res)
+                                    // console.log(this.sql)
+                                    // console.log(res)
                                     console.log("Department IDs : Department Names : over_head_costs : product_sales : total_profit")
                                     for(var i=0; i<res.length; i++){
                                         overhead = res[i].over_head_costs
