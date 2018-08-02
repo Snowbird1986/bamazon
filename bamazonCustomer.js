@@ -249,7 +249,7 @@ inquirer.prompt([
                     ]).then(managerAction => {
                         switch (managerAction.action) {
                             case 'View Product Sales by Department':
-                                connection1.query("SELECT * FROM departments LEFT JOIN (select department_name, sum(product_sales) AS Department_Sales FROM products) AS a ON departments.department_name=a.department_name", function(err, res) {
+                                connection1.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.department_name, sum(products.product_sales) AS Department_Sales FROM departments LEFT JOIN products ON departments.department_name=products.department_name GROUP BY departments.department_id, departments.department_name", function(err, res) {
                                     if (err) throw err;
                                     console.log(this.sql)
                                     console.log(res)
@@ -294,6 +294,10 @@ inquirer.prompt([
                                 console.log("Incorrect input")
                         }
                     })
+                }
+                else{
+                    console.log("Incorrect Username and/or Password, please try again.")
+                    bamazonStore()
                 }
                 break;
             case 'Quit':
